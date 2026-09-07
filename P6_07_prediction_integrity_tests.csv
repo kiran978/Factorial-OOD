@@ -1,0 +1,11 @@
+test_id,description,status,detail
+P6-T01,8 Primary endpoints represented,PASS,8
+P6-T02,5 outer folds represented,PASS,"[0, 1, 2, 3, 4]"
+P6-T03,No duplicate learned parent OOF key,PASS,0
+P6-T04,All probabilities finite,PASS,finite
+P6-T05,"All probabilities within [0,1]",PASS,range
+P6-T06,"All learned thresholds within [0.01,0.99]",PASS,range
+P6-T07,All learned predictions use locked registry,PASS,10005b76d389dcc73466ef377cf4f5d2ee0787ff71b95523d08ab2b988276b57
+P6-T08,Expected learned family-modality combinations = 12,PASS,12
+P6-T09,Expected controls = 3,PASS,3
+P6-T10,No endpoint label missing in prediction table,PASS,0

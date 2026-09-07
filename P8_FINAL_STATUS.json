@@ -1,0 +1,14 @@
+{
+  "phase": 8,
+  "status": "PASS",
+  "analysis": "Continuous Support, Applicability Domain and Selective Prediction",
+  "phase8_lock_sha256": "bcdc7949ed79acdccf7e8ba4a2b0346e24a7e18f371af0718910d656a6c88729",
+  "bootstrap_resamples_per_endpoint": 2000,
+  "parent_support_n": 2017,
+  "learned_oof_rows": 120000,
+  "continuous_coefficient_rows": 384,
+  "selective_risk_curve_rows": 24480,
+  "selective_comparison_rows": 864,
+  "integrity_tests": "19/19 PASS",
+  "interpretation_status": "Outputs generated and locked; interpret only after independent package validation."
+}

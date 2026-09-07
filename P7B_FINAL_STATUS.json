@@ -1,0 +1,24 @@
+{
+  "phase": "7B",
+  "status": "PASS",
+  "analysis_lock_sha256": "9a33833429a4cff1f612af3ad401f0d721e2cb838b9e0e9837b4b5fde09ecfee",
+  "bootstrap_resamples_per_endpoint": 2000,
+  "prespecified_secondary_metrics": [
+    "AUROC",
+    "balanced_accuracy",
+    "sensitivity",
+    "specificity",
+    "calibration_intercept",
+    "calibration_slope"
+  ],
+  "added_sensitivity_metrics": [
+    "balanced_MCC",
+    "Brier_skill_score",
+    "abs_calibration_intercept",
+    "calibration_slope_abs_error"
+  ],
+  "cell_metric_rows": 384,
+  "contrast_rows": 6912,
+  "integrity_tests": "15/15 PASS",
+  "governance": "Phase 7 co-primary results remain unchanged."
+}

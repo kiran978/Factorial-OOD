@@ -1,0 +1,28 @@
+{
+  "phase": 7,
+  "status": "PASS",
+  "analysis": "Primary Factorial OOD Analysis",
+  "protocol": "v0.2",
+  "phase7_lock_sha256": "0a3430967ddb9614972209102a287e95ab269e271eebd0f89633dfcd89c10ccd",
+  "bootstrap_resamples_per_endpoint": 2000,
+  "bootstrap_unit": "unique parent compound",
+  "primary_endpoint_n": 8,
+  "learned_model_combinations": 12,
+  "factorial_cells": [
+    "C0/B0",
+    "C1/B0",
+    "C0/B1",
+    "C1/B1"
+  ],
+  "factorial_parent_counts": {
+    "C0/B0": 1219,
+    "C1/B0": 574,
+    "C0/B1": 135,
+    "C1/B1": 89
+  },
+  "p4_10_exact_reconstruction": true,
+  "learned_factorial_cell_metric_rows": 384,
+  "confirmatory_contrast_rows": 1824,
+  "integrity_tests": "14/14 PASS",
+  "interpretation_status": "Statistical outputs generated; scientific interpretation must occur only from these locked Phase-7 outputs."
+}

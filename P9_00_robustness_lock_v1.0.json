@@ -1,0 +1,219 @@
+{
+  "project": "FACTORIAL-OOD",
+  "phase": "9",
+  "title": "Prespecified Robustness and Distribution-Shift Stress Testing",
+  "version": "v1.0",
+  "freeze_date": "2026-09-01",
+  "status": "FROZEN_BEFORE_ANY_PHASE9_ROBUSTNESS_RESULT_INSPECTION",
+  "purpose": "Test whether the Phase 7/7B/8 headline directions depend on one support definition, Route-B aggregation choice, biological context, missing-context pattern, or grouped split seed. Phase 9 is robustness-only and may narrow claims but may not replace the primary analysis.",
+  "immutable_upstream": {
+    "primary_endpoints_n": 8,
+    "model_families": [
+      "ELASTIC_NET",
+      "RANDOM_FOREST",
+      "HIST_GRAD_BOOST"
+    ],
+    "modalities": [
+      "STRUCTURE",
+      "HTTR",
+      "EARLY_FUSION",
+      "LATE_FUSION"
+    ],
+    "parent_inferential_unit": "unique curated parent compound",
+    "phase6_registry_sha256": "10005b76d389dcc73466ef377cf4f5d2ee0787ff71b95523d08ab2b988276b57",
+    "phase8_upload_zip_sha256": "03b7164c8f67c632ed50de0c6c70bcd7c5682fb41697ad1e6517bbc21c810856",
+    "phase4_v3_manifest_sha256": "6fc68b0a51e1d696643969433dc6caea46a6eb6fd52075d00963f9113833aff1",
+    "phase4_split_registry_sha256": "c359b3c398b6fcc3420809daebc474be570adc7c1a07e9934dae7d3eaff38cc4",
+    "phase4_seed_lock_sha256": "d00a4b55dca922584ad69a8ea39a96e6a14935a9c110d4fb6af720d447aba707",
+    "phase6_context_oof_sha256": "e58e741dceb05730b699cc05f898468d8a964a07a7b333719232885e56bcb87f",
+    "phase6_parent_oof_sha256": "45d1c87930de43b9a02a75eddf00b696fd2f2351dbc2955841e34bde42a2c965",
+    "phase3_bio_threshold_sha256": "bd39b12ca273f26926c2186d9c3e0e0d8ee02f99bf7ce678f64f18abe7175a80"
+  },
+  "headline_results_to_stress_test_not_redefine": [
+    "AUPRC is strongly prevalence-sensitive across factorial regimes and may move opposite to AUROC.",
+    "Pooled compound-aware validation is optimistic for joint-OOD AUROC in the locked Phase 7B analysis.",
+    "Structure-only probability skill deteriorates under joint chemical-biological shift.",
+    "HTTr-informed models attenuate the structure-only reliability loss and joint novelty interaction.",
+    "Biological-response-space novelty predicts probability error beyond model confidence.",
+    "Support-based abstention identifies elevated-risk predictions, but confidence-based abstention is more efficient."
+  ],
+  "module_9A_support_definition_and_severity": {
+    "uses_locked_primary_split_predictions_only": true,
+    "no_retraining": true,
+    "chemical_definitions": [
+      {
+        "id": "CHEM_PRIMARY_HYBRID_050",
+        "rule": "Frozen v0.2 rule: C0 if scaffold represented OR max Morgan >=0.50; C1 otherwise (unseen scaffold AND max Morgan <0.50)."
+      },
+      {
+        "id": "CHEM_SIM_ONLY_050",
+        "rule": "C0 if max Morgan >=0.50; C1 if max Morgan <0.50."
+      },
+      {
+        "id": "CHEM_SIM_ONLY_040",
+        "rule": "C0 if max Morgan >=0.40; C1 if max Morgan <0.40."
+      },
+      {
+        "id": "CHEM_SIM_ONLY_030",
+        "rule": "C0 if max Morgan >=0.30; C1 if max Morgan <0.30."
+      },
+      {
+        "id": "CHEM_SCAFFOLD_ONLY",
+        "rule": "C0 if frozen scaffold_represented_in_train=True; C1 otherwise."
+      }
+    ],
+    "biological_definitions": [
+      {
+        "id": "BIO_PRIMARY_Q75_MEDIAN",
+        "rule": "Frozen v0.2 primary biological_state from median Route-B HTTr distance versus training q75."
+      },
+      {
+        "id": "BIO_Q90_MEDIAN",
+        "rule": "Use frozen Phase-3 B_state_amended_q90 (median distance; binary q90 definition)."
+      },
+      {
+        "id": "BIO_Q95_MEDIAN_BUFFERED",
+        "rule": "Use frozen Phase-3 B_state_primary_q95: B0 <= q90, BBUF q90..q95, B1 > q95; exclude BBUF from factorial contrasts."
+      },
+      {
+        "id": "BIO_Q975_MEDIAN_BUFFERED",
+        "rule": "Use frozen Phase-3 B_state_q975: B0 <= q90, BBUF q90..q97.5, B1 > q97.5; exclude BBUF."
+      },
+      {
+        "id": "BIO_Q95_WORST_CONTEXT_BUFFERED",
+        "rule": "Use frozen Phase-3 B_state_worst_q95 based on worst available context distance; exclude BBUF."
+      }
+    ],
+    "factorial_cartesian_grid": "All 5 chemical definitions x all 5 biological definitions = 25 prespecified support-definition combinations.",
+    "metrics": [
+      "AUROC",
+      "AUPRC with cell prevalence",
+      "MCC",
+      "balanced_MCC",
+      "Brier",
+      "Brier_skill_score",
+      "ECE",
+      "balanced_accuracy",
+      "sensitivity",
+      "specificity"
+    ],
+    "primary_robustness_contrasts": [
+      "joint_vs_reference: M(C1/B1)-M(C0/B0)",
+      "interaction: M(C1/B1)-M(C1/B0)-M(C0/B1)+M(C0/B0)",
+      "optimism: M(all pooled OOF)-M(C1/B1)",
+      "fusion_robustness: [Fusion-Structure]C1/B1-[Fusion-Structure]C0/B0"
+    ],
+    "support_rule": "Pooled endpoint x factorial cell must contain both classes; otherwise mark unsupported. Do not merge or repair sparse cells."
+  },
+  "module_9B_routeB_aggregation": {
+    "primary": "arithmetic mean of context-row raw probabilities to parent",
+    "sensitivity": "median of the same locked context-row raw probabilities to parent",
+    "scope": [
+      "HTTR",
+      "EARLY_FUSION",
+      "LATE_FUSION"
+    ],
+    "implementation": "Outer-prediction aggregation sensitivity only. Use the exact frozen Phase-6 models, fold-specific Platt coefficients, decision thresholds and late-fusion weights. For HTTR/EARLY_FUSION, aggregate locked raw context probabilities by median, then apply the original fold-specific calibrator. For LATE_FUSION, combine the median-aggregated calibrated HTTR probability with the unchanged structure probability using the original late-fusion weight. No retuning/recalibration is allowed in this module.",
+    "comparison": "paired mean-versus-median differences using the same labeled parents and bootstrap draws"
+  },
+  "module_9C_context_and_missingness": {
+    "context_specific_locked_prediction_analysis": {
+      "contexts": [
+        "MCF7",
+        "U2OS",
+        "HepRG"
+      ],
+      "models": [
+        "HTTR",
+        "EARLY_FUSION",
+        "LATE_FUSION"
+      ],
+      "rule": "Use one locked context-row prediction per parent/context. Apply the original fold-specific calibrator; construct context-specific late fusion using the original structure probability and fusion weight. Parent is the bootstrap unit."
+    },
+    "missing_context_sensitivity": {
+      "strata": [
+        "n_contexts=1",
+        "n_contexts=2",
+        "n_contexts=3",
+        "all_three=True",
+        "all_three=False"
+      ],
+      "rule": "Use locked parent OOF predictions; report only estimable endpoint/model/stratum results."
+    },
+    "V4_leave_one_context_out": {
+      "status": "FROZEN_SECONDARY_RETRAINING_STRESS_TEST",
+      "contexts": [
+        "MCF7",
+        "U2OS",
+        "HepRG"
+      ],
+      "rule": "For each held-out context, refit preprocessing, PCA, models, calibration and thresholds using only the other contexts and the unchanged Phase-6 candidate grids/tuning rules. No held-out-context outcome may influence selection. All three held-out contexts must be reported; none may be selected post hoc.",
+      "gateD_role": "supportive; inability to execute leakage-safely must be reported and cannot be replaced by a post-hoc shortcut"
+    }
+  },
+  "module_9D_V3_split_robustness": {
+    "split_sets": {
+      "V3_ALT01": "FACTORIAL-OOD-V3-ALT-01",
+      "V3_ALT02": "FACTORIAL-OOD-V3-ALT-02",
+      "V3_ALT03": "FACTORIAL-OOD-V3-ALT-03",
+      "V3_ALT04": "FACTORIAL-OOD-V3-ALT-04"
+    },
+    "outer_manifest": "P4_03_v3_alternative_outer_splits_FROZEN.csv",
+    "inner_manifest": "P4_04_nested_inner_split_manifest_FROZEN.csv",
+    "retraining_required": true,
+    "rules": [
+      "Run all four V3 split sets; never select or omit a split because of performance.",
+      "Recompute descriptor scaling, HTTr variance filtering/scaling/PCA inside each alternative outer/inner training scope.",
+      "Use the exact Phase-6 candidate grids, tuning metric, calibration method, MCC threshold grid, late-fusion weights and random-seed derivation principles.",
+      "No new model family, feature representation or tuning budget may enter V3.",
+      "Store immutable parent OOF predictions separately for each V3 split set before robustness statistics.",
+      "V3 split sets are robustness replicates, not independent biological replicates."
+    ]
+  },
+  "class_imbalance_robustness": {
+    "status": "FULFILLED_BY_PHASE7B_FOR_CORE_CLAIMS",
+    "evidence": "balanced accuracy, balanced MCC, prevalence-aware AUPRC interpretation and Brier Skill Score already computed.",
+    "prohibited": "No synthetic resampling of any test set."
+  },
+  "representation_sensitivity": {
+    "status": "NOT_GATE_D_CORE",
+    "reason": "The Phase-0 protocol mentioned MACCS and pathway/latent HTTr sensitivities, but exact post-Phase-5 implementation objects were not frozen for all alternatives before primary outcome access. Any newly implemented representation sensitivity after this freeze must be labeled exploratory and may not rescue Gate D."
+  },
+  "statistics": {
+    "bootstrap_unit": "unique parent compound",
+    "bootstrap_resamples": 2000,
+    "paired_draws_within_endpoint": true,
+    "ci": "95% percentile",
+    "two_sided_p": "centered bootstrap",
+    "validity_requirement": ">=90% valid bootstrap draws",
+    "multiplicity": "BH-FDR within each named module x metric x contrast family",
+    "across_endpoint": "supportive DerSimonian-type random-effects synthesis; endpoint estimates remain visible",
+    "outer_folds_or_split_seeds_are_not_independent_biological_replicates": true
+  },
+  "gate_D_claim_stability_rules": {
+    "support_definition_stability": "For a headline direction to be called robust, >=75% of supported 9A definition combinations must match the Phase7/7B/8 direction and no supported definition may show an FDR-significant effect in the opposite direction.",
+    "V3_split_stability": "For a headline direction to be called split-robust, >=3 of 4 V3 split-level across-endpoint estimates must match the primary direction; if >=2 of 4 reverse direction, the claim is downgraded. A split with an opposite 95% CI excluding zero is explicitly reported.",
+    "aggregation_stability": "Mean-to-median aggregation must not systematically reverse the headline direction. Any material reversal is reported as aggregation dependence.",
+    "context_stability": "A context-general claim requires the same direction in at least 2 of 3 estimable contexts and no evidence that one context alone accounts for the full effect. Otherwise the claim becomes context-dependent.",
+    "missingness_stability": "Where estimable, the key direction should be retained in both complete (3-context) and incomplete-context strata; otherwise state missing-context dependence.",
+    "failure_action": "Reduce or qualify the manuscript claim. Never change thresholds, omit seeds, remove endpoints or retune models."
+  },
+  "prohibited_actions": [
+    "No replacement of Phase7/7B/8 primary results by a more favorable Phase9 variant.",
+    "No selecting favorable chemical/biological thresholds.",
+    "No selecting favorable V3 seeds.",
+    "No endpoint removal based on Phase9 performance.",
+    "No model, feature, calibration, threshold or fusion-weight retuning based on observed Phase9 test results.",
+    "No treating contexts, folds or V3 seeds as independent biological replicates.",
+    "No presenting post-outcome representation experiments as prespecified confirmatory robustness."
+  ],
+  "execution_order": [
+    "P9 preflight (metadata/checks only; no performance)",
+    "P9A support-definition/severity robustness on immutable OOF predictions",
+    "P9B Route-B aggregation sensitivity",
+    "P9C context/missingness sensitivity",
+    "P9D four V3 full retraining robustness",
+    "V4 leave-one-context-out secondary stress test",
+    "Gate D synthesis and claim classification"
+  ]
+}

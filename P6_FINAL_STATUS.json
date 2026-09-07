@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "phase": "6",
+  "primary_endpoint_n": 8,
+  "learned_family_n": 3,
+  "learned_modalities_per_family": 4,
+  "control_n": 3,
+  "locked_parent_oof_rows": 150000,
+  "locked_context_oof_rows": 122478,
+  "registry_sha256": "10005b76d389dcc73466ef377cf4f5d2ee0787ff71b95523d08ab2b988276b57",
+  "prediction_integrity_tests": "10/10 PASS",
+  "interpretation_boundary": "global benchmark metrics generated; factorial C0/B0-C1/B1 interpretation prohibited until Phase 7"
+}

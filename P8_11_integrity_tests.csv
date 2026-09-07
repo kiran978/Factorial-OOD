@@ -1,0 +1,20 @@
+test_id,description,status,detail
+P8-T01,Phase 8 scientific lock frozen before computation,PASS,bcdc7949ed79acdccf7e8ba4a2b0346e24a7e18f371af0718910d656a6c88729
+P8-T02,P7 upstream status PASS,PASS,PASS
+P8-T03,P7B upstream status PASS,PASS,PASS
+P8-T04,2017 unique parent support scores constructed,PASS,2017
+P8-T05,Recomputed test Morgan max similarity matches frozen Phase3 values,PASS,2.9313759752902513e-08
+P8-T06,"Continuous support percentiles finite and in [0,1]",PASS,
+P8-T07,Training biological q75/q90/q95/q97.5 thresholds reconstruct,PASS,1.4210854715202004e-14
+P8-T08,Locked learned OOF rows exactly 120000,PASS,120000
+P8-T09,Exactly 8 endpoints and 12 learned model combinations,PASS,
+P8-T10,All learned OOF rows join to continuous support,PASS,0
+P8-T11,Continuous regression coefficient rows = 384,PASS,384
+P8-T12,Incremental R2 rows = 96,PASS,96
+P8-T13,Dense ALL-OOF risk curve rows = 24480,PASS,24480
+P8-T14,Key-coverage rows include ALL and joint-OOD descriptive scopes,PASS,"{'ALL_OOF': 2880, 'JOINT_OOD_DESCRIPTIVE': 2880}"
+P8-T15,Selective signed comparison rows = 864,PASS,864
+P8-T16,Eight bootstrap archives generated,PASS,8
+P8-T17,All regression/selective bootstrap signed effects meet >=90% valid fraction,PASS,"{'reg_unsupported': 0, 'sel_unsupported': 0}"
+P8-T18,"All finite q-values in [0,1]",PASS,
+P8-T19,No retraining/recalibration/threshold modification performed,PASS,

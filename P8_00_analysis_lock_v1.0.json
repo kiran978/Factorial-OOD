@@ -1,0 +1,106 @@
+{
+  "project": "FACTORIAL-OOD",
+  "phase": "8",
+  "analysis_name": "Continuous Support, Applicability Domain and Selective Prediction",
+  "protocol": "v0.2 + original Phase-0 applicability-domain/selective-prediction plan",
+  "freeze_status": "FROZEN_BEFORE_PHASE8_OUTCOME_INSPECTION",
+  "primary_inferential_unit": "unique curated parent compound",
+  "upstream_results_immutable": [
+    "Phase 6",
+    "Phase 7",
+    "Phase 7B"
+  ],
+  "learned_models_only": {
+    "families": [
+      "ELASTIC_NET",
+      "RANDOM_FOREST",
+      "HIST_GRAD_BOOST"
+    ],
+    "modalities": [
+      "STRUCTURE",
+      "HTTR",
+      "EARLY_FUSION",
+      "LATE_FUSION"
+    ]
+  },
+  "support_scores": {
+    "chemical_support_percentile": "Outer-training empirical percentile of test maximum Morgan-r2 Tanimoto against training-parent leave-one-out NN Tanimoto distribution; higher = more supported.",
+    "biological_support_percentile": "1 minus outer-training empirical percentile of test median HTTr 5NN PCA distance against training-parent leave-one-out HTTr-distance distribution; higher = more supported.",
+    "joint_support_primary": "Geometric mean sqrt(chemical_support_percentile * biological_support_percentile).",
+    "joint_support_sensitivity": "Minimum of chemical and biological support percentiles; stored but not a primary selective-ranking strategy.",
+    "no_test_outcomes_or_test_distribution_used_for_support_scores": true
+  },
+  "continuous_reliability_model": {
+    "primary_outcome": "per-parent squared probability error (p-y)^2",
+    "predictors": "z chemical novelty + z biological novelty + their interaction + z model uncertainty",
+    "chemical_novelty": "1 - chemical_support_percentile",
+    "biological_novelty": "1 - biological_support_percentile",
+    "model_uncertainty": "1 - [2*abs(probability-0.5)]",
+    "purpose": "Test whether chemical and biological support contribute information about probability error beyond maximum-class-probability confidence.",
+    "incremental_information": "Delta R2 of full support+uncertainty model versus uncertainty-only model; descriptive with bootstrap CI."
+  },
+  "selective_prediction": {
+    "primary_risk": "mean squared probability error (Brier contribution)",
+    "primary_scope": "all immutable OOF parents for each endpoint",
+    "joint_ood_scope": "C1/B1 descriptive stress-set curves only",
+    "ranking_strategies": [
+      "CHEMICAL_SUPPORT",
+      "BIOLOGICAL_SUPPORT",
+      "JOINT_SUPPORT",
+      "CONFIDENCE",
+      "HYBRID_SUPPORT_CONFIDENCE"
+    ],
+    "confidence_score": "2*abs(probability-0.5), higher = more confident",
+    "hybrid_score": "geometric mean of joint support and confidence score",
+    "aurc_range": "coverage 0.50 to 1.00 in 0.01 increments; normalized trapezoidal area, lower = better",
+    "key_coverages": [
+      1.0,
+      0.9,
+      0.8,
+      0.7,
+      0.6,
+      0.5
+    ],
+    "key_metrics": [
+      "Brier_risk",
+      "Brier_skill_score",
+      "AUROC",
+      "balanced_MCC",
+      "AUPRC",
+      "ECE_10bin",
+      "classification_error_rate",
+      "prevalence"
+    ],
+    "primary_comparisons": [
+      "full-risk minus JOINT_SUPPORT AURC (positive = selective benefit)",
+      "full-risk minus HYBRID_SUPPORT_CONFIDENCE AURC (positive = selective benefit)",
+      "CONFIDENCE AURC minus JOINT_SUPPORT AURC (positive = support better than confidence)",
+      "CONFIDENCE AURC minus HYBRID_SUPPORT_CONFIDENCE AURC (positive = hybrid better than confidence)"
+    ],
+    "coverage_floor": 0.5
+  },
+  "inference": {
+    "bootstrap_unit": "parent compound",
+    "bootstrap_resamples": 2000,
+    "same_parent_bootstrap_draw_across_models_within_endpoint": true,
+    "confidence_interval": "95% percentile",
+    "p_value": "centered two-sided bootstrap for signed effects",
+    "multiplicity": "Benjamini-Hochberg FDR within named coefficient/comparison families",
+    "across_endpoint_synthesis": "DerSimonian-Laird style random-effects using endpoint bootstrap SE; endpoint effects remain visible"
+  },
+  "governance": {
+    "no_retraining": true,
+    "no_recalibration": true,
+    "no_threshold_change": true,
+    "no_endpoint_reselection": true,
+    "no_support_definition_change_after_results": true,
+    "negative_or_null_selective_results_retained": true,
+    "phase9_reserved_for": [
+      "q90/q95/q97.5 biological severity",
+      "chemical-threshold sensitivities",
+      "V3 alternative split sets",
+      "leave-one-context-out",
+      "mean-vs-median Route-B aggregation"
+    ]
+  }
+}

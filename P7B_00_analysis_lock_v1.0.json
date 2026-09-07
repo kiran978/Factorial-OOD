@@ -1,0 +1,35 @@
+{
+  "project": "FACTORIAL-OOD",
+  "phase": "7B",
+  "name": "Prevalence-Aware Secondary and Calibration Completion",
+  "created_before_phase7b_results": true,
+  "does_not_replace_phase7_coprimary_analysis": true,
+  "source_predictions": "Phase7_Output/P7_02_locked_OOF_with_factorial_cells.csv",
+  "source_status": "Phase7_Output/P7_FINAL_STATUS.json must be PASS",
+  "factorial_cells": [
+    "C0/B0",
+    "C1/B0",
+    "C0/B1",
+    "C1/B1"
+  ],
+  "parent_bootstrap_resamples": 2000,
+  "bootstrap_pairing": "same parent resample used across all 12 learned models within an endpoint",
+  "bootstrap_draws": "exact Phase-7 parent bootstrap seed namespace and sampling rule reused",
+  "prespecified_secondary_metrics": [
+    "AUROC",
+    "balanced_accuracy",
+    "sensitivity",
+    "specificity",
+    "calibration_intercept",
+    "calibration_slope"
+  ],
+  "added_prevalence_aware_sensitivity_metrics": {
+    "balanced_MCC": "MCC calibrated to prevalence 0.5 using sensitivity and specificity; Guesne et al., Journal of Cheminformatics 2024, DOI 10.1186/s13321-024-00837-w",
+    "Brier_skill_score": "1 - model Brier / cell-prevalence constant-predictor Brier",
+    "abs_calibration_intercept": "absolute deviation from ideal intercept 0",
+    "calibration_slope_abs_error": "absolute deviation from ideal slope 1"
+  },
+  "multiplicity": "Benjamini-Hochberg FDR within analysis_family \u00d7 metric \u00d7 contrast",
+  "support_rule": "bootstrap metric is confirmatorily interpretable only if >=90% of 2000 resamples are estimable",
+  "governance": "No model, endpoint, fold, threshold, modality, support cutoff, or Phase-7 primary conclusion may be changed based on Phase-7B results."
+}

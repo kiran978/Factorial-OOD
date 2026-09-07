@@ -1,0 +1,16 @@
+test_id,description,status,detail
+P7B-T01,Phase 7 status PASS,PASS,PASS
+P7B-T02,Phase 7 source OOF exists,PASS,/home/lenovo/Documents/Kiran Gaikwad/Pharmacodia/Chem/Phase7_Output/P7_02_locked_OOF_with_factorial_cells.csv
+P7B-T03,"Source OOF has 150,000 rows",PASS,150000
+P7B-T04,"Learned source has 120,000 rows",PASS,120000
+P7B-T05,Exactly 12 learned model combinations,PASS,12
+P7B-T06,Exactly four factorial cells,PASS,"['C0/B0', 'C0/B1', 'C1/B0', 'C1/B1']"
+P7B-T07,Secondary cell table has 384 rows,PASS,384
+P7B-T08,Eight bootstrap archives generated,PASS,8
+P7B-SUP-AUROC,AUROC has >=90% bootstrap support in all 384 cells,PASS,0
+P7B-SUP-balanced,balanced_accuracy has >=90% bootstrap support in all 384 cells,PASS,0
+P7B-SUP-sensitiv,sensitivity has >=90% bootstrap support in all 384 cells,PASS,0
+P7B-SUP-specific,specificity has >=90% bootstrap support in all 384 cells,PASS,0
+P7B-SUP-balanced,balanced_MCC has >=90% bootstrap support in all 384 cells,PASS,0
+P7B-SUP-Brier_sk,Brier_skill_score has >=90% bootstrap support in all 384 cells,PASS,0
+P7B-T09,"All finite q-values in [0,1]",PASS,

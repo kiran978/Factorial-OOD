@@ -1,0 +1,126 @@
+{
+  "phase": "6",
+  "protocol": "v0.2",
+  "created_before_model_results": true,
+  "primary_endpoints": [
+    "TOX21_ERa_BLA_Antagonist_ratio",
+    "TOX21_FXR_BLA_Antagonist_ratio",
+    "TOX21_MMP_ratio",
+    "TOX21_PPARg_BLA_Antagonist_ratio",
+    "TOX21_RAR_LUC_Antagonist",
+    "TOX21_RORg_LUC_CHO_Antagonist",
+    "TOX21_SBE_BLA_Antagonist_ratio",
+    "TOX21_hERG_U2OS_Antagonist"
+  ],
+  "outer_split": "Phase4 PRIMARY frozen 5-fold parent-group split",
+  "inner_split": "Phase4 PRIMARY frozen 4-fold nested split inside each outer training fold",
+  "modalities": [
+    "STRUCTURE",
+    "HTTR",
+    "EARLY_FUSION",
+    "LATE_FUSION"
+  ],
+  "controls": {
+    "PREVALENCE": "outer-training labeled-parent prevalence",
+    "CHEMICAL_5NN": "5 nearest labeled training parents by Morgan/Tanimoto; similarity-weighted mean label",
+    "BIOLOGICAL_5NN": "5 nearest labeled training parents by Euclidean distance between mean parent HTTr-PC vectors; inverse-distance-weighted mean label"
+  },
+  "model_grids": {
+    "ELASTIC_NET": [
+      {
+        "candidate_id": "EN01",
+        "C": 0.01,
+        "l1_ratio": 0.5
+      },
+      {
+        "candidate_id": "EN02",
+        "C": 0.1,
+        "l1_ratio": 0.5
+      },
+      {
+        "candidate_id": "EN03",
+        "C": 1.0,
+        "l1_ratio": 0.5
+      },
+      {
+        "candidate_id": "EN04",
+        "C": 10.0,
+        "l1_ratio": 0.5
+      }
+    ],
+    "RANDOM_FOREST": [
+      {
+        "candidate_id": "RF01",
+        "n_estimators": 300,
+        "max_features": "sqrt",
+        "min_samples_leaf": 1
+      },
+      {
+        "candidate_id": "RF02",
+        "n_estimators": 300,
+        "max_features": "sqrt",
+        "min_samples_leaf": 5
+      },
+      {
+        "candidate_id": "RF03",
+        "n_estimators": 300,
+        "max_features": 0.25,
+        "min_samples_leaf": 1
+      },
+      {
+        "candidate_id": "RF04",
+        "n_estimators": 300,
+        "max_features": 0.25,
+        "min_samples_leaf": 5
+      }
+    ],
+    "HIST_GRAD_BOOST": [
+      {
+        "candidate_id": "HGB01",
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 15,
+        "l2_regularization": 0.0
+      },
+      {
+        "candidate_id": "HGB02",
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 31,
+        "l2_regularization": 1.0
+      },
+      {
+        "candidate_id": "HGB03",
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 15,
+        "l2_regularization": 1.0
+      },
+      {
+        "candidate_id": "HGB04",
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 31,
+        "l2_regularization": 0.0
+      }
+    ]
+  },
+  "tuning": "maximize pooled parent-level inner OOF AUPRC; deterministic first candidate in declared order on exact tie",
+  "sample_weighting": {
+    "structure": "balanced class weight at parent level",
+    "context_models": "balanced parent-level class weight divided by number of training contexts for that parent, so each parent has equal total contribution within class"
+  },
+  "calibration": "Platt logistic calibration on logit(raw probability), fitted on pooled inner OOF parent probabilities only; no class weighting",
+  "threshold": "maximize MCC on calibrated inner OOF parent probabilities over fixed 0.01..0.99 grid; tie -> closest to 0.5 then lower",
+  "route_B_aggregation": "arithmetic mean of context-row raw probabilities to parent before calibration (primary)",
+  "late_fusion": {
+    "formula": "w * calibrated_structure + (1-w) * calibrated_HTTr",
+    "weight_grid": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "selection": "inner OOF AUPRC only",
+    "second_calibration": false
+  },
+  "fixed_0_5_threshold": "stored as secondary sensitivity only; learned-model primary predicted class uses fold-specific inner-OOF MCC threshold",
+  "outer_test_use": "prediction only; never model/hyperparameter/calibration/threshold/fusion-weight selection"
+}

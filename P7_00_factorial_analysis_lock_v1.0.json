@@ -1,0 +1,64 @@
+{
+  "project": "FACTORIAL-OOD",
+  "phase": 7,
+  "protocol": "v0.2",
+  "analysis": "Primary Factorial OOD Analysis",
+  "created_before_factorial_performance_inspection": true,
+  "inferential_unit": "unique curated parent compound",
+  "primary_cells": [
+    "C0/B0",
+    "C1/B0",
+    "C0/B1",
+    "C1/B1"
+  ],
+  "primary_metrics": [
+    "AUPRC",
+    "MCC"
+  ],
+  "reliability_metrics": [
+    "Brier",
+    "ECE_10bin"
+  ],
+  "descriptive_reliability": [
+    "calibration_intercept",
+    "calibration_slope",
+    "AUROC",
+    "balanced_accuracy",
+    "sensitivity",
+    "specificity"
+  ],
+  "confirmatory_models": {
+    "families": [
+      "ELASTIC_NET",
+      "RANDOM_FOREST",
+      "HIST_GRAD_BOOST"
+    ],
+    "modalities": [
+      "STRUCTURE",
+      "HTTR",
+      "EARLY_FUSION",
+      "LATE_FUSION"
+    ]
+  },
+  "controls": "descriptive only",
+  "bootstrap": {
+    "unit": "parent compound",
+    "resamples": 2000,
+    "paired_across_models": true,
+    "ci": "percentile 95%",
+    "minimum_valid_fraction_for_confirmatory_inference": 0.9,
+    "seed_namespace": "FACTORIAL-OOD-P7-v1"
+  },
+  "contrasts": {
+    "chemical_effect": "M(C1/B0)-M(C0/B0)",
+    "biological_effect": "M(C0/B1)-M(C0/B0)",
+    "joint_vs_reference": "M(C1/B1)-M(C0/B0)",
+    "joint_vs_chemical": "M(C1/B1)-M(C1/B0)",
+    "joint_vs_biological": "M(C1/B1)-M(C0/B1)",
+    "factorial_interaction": "M(C1/B1)-M(C1/B0)-M(C0/B1)+M(C0/B0)",
+    "fusion_robustness": "[(Fusion-Structure)C1/B1]-[(Fusion-Structure)C0/B0]",
+    "conventional_optimism": "M(all pooled OOF)-M(C1/B1)"
+  },
+  "multiple_testing": "Benjamini-Hochberg FDR within each named hypothesis/metric/contrast family",
+  "interpretation_rule": "No model, endpoint, threshold, cell definition or support cutoff may change after factorial results are inspected."
+}
