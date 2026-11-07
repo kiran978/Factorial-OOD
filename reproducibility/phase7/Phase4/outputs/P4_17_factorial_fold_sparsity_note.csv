@@ -1,0 +1,5 @@
+factorial_cell,endpoint_fold_rows,zero_active_endpoint_fold_rows,zero_inactive_endpoint_fold_rows,min_labeled_per_endpoint_fold,median_labeled_per_endpoint_fold,interpretation_rule
+C0/B0,40,0,0,116,154.0,Do not estimate fold-specific cell performance when either class is absent; use pooled immutable OOF predictions for primary factorial metrics.
+C0/B1,40,2,0,6,14.0,Do not estimate fold-specific cell performance when either class is absent; use pooled immutable OOF predictions for primary factorial metrics.
+C1/B0,40,0,0,51,67.5,Do not estimate fold-specific cell performance when either class is absent; use pooled immutable OOF predictions for primary factorial metrics.
+C1/B1,40,1,0,4,9.0,Do not estimate fold-specific cell performance when either class is absent; use pooled immutable OOF predictions for primary factorial metrics.

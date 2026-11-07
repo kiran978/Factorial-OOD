@@ -1,0 +1,6 @@
+split_set,role,outer_seed,outer_folds,inner_folds,outer_assignment_source,endpoint_outcomes_used,status,protocol,approval_date
+PRIMARY,confirmatory primary,FACTORIAL-OOD-v0.1,5,4,Inherited unchanged from P3_02 nominated manifest,False,FROZEN,v0.2,2026-08-31
+V3_ALT01,V3 robustness only,FACTORIAL-OOD-V3-ALT-01,5,4,Prospectively generated in Phase 4 from identity fields only,False,FROZEN_FOR_LATER_V3,v0.2,2026-08-31
+V3_ALT02,V3 robustness only,FACTORIAL-OOD-V3-ALT-02,5,4,Prospectively generated in Phase 4 from identity fields only,False,FROZEN_FOR_LATER_V3,v0.2,2026-08-31
+V3_ALT03,V3 robustness only,FACTORIAL-OOD-V3-ALT-03,5,4,Prospectively generated in Phase 4 from identity fields only,False,FROZEN_FOR_LATER_V3,v0.2,2026-08-31
+V3_ALT04,V3 robustness only,FACTORIAL-OOD-V3-ALT-04,5,4,Prospectively generated in Phase 4 from identity fields only,False,FROZEN_FOR_LATER_V3,v0.2,2026-08-31

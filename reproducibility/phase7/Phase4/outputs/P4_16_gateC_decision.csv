@@ -1,0 +1,7 @@
+check,status,evidence
+Primary outer split inherited unchanged,PASS,2017/2017 exact matches
+Nested outer/inner identities are disjoint,PASS,See P4_12 L11-L15
+Parent/context/source duplicate leakage,PASS,See P4_12 L05-L10
+Train-only chemical/biological support verified,PASS,Full chemical recomputation + biological training-distance q75 audit
+Primary endpoint inner/outer estimability,PASS,min inner-val active/inactive 14/160; min outer-test 16/175
+Overall Gate C,PASS,23/23 leakage/unit tests PASS

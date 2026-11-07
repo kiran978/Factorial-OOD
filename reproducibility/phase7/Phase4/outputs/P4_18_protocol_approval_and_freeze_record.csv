@@ -1,0 +1,2 @@
+project,protocol_version,approval_status,approval_date,phase4_freeze_status,primary_outer_manifest,nested_inner_manifest,change_control
+FACTORIAL-OOD,v0.2,APPROVED_BY_USER,2026-08-31,FROZEN_AFTER_GATE_C_PASS,P4_01_primary_outer_split_manifest_FROZEN.csv,P4_04_nested_inner_split_manifest_FROZEN.csv,Any later split reassignment invalidates confirmatory status for affected analyses and requires an untouched evaluation or prospective amendment.

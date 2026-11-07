@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.venv/
+env_py310/
+Phase7_Output/bootstrap/*.npz
+Phase7_Output/P7_*.csv
+Phase7_Output/P7_FINAL_STATUS.json
+Phase7_Output/Phase7_UPLOAD_TO_CHAT.zip
+Phase7_Output/SHA256SUMS_PHASE7.txt
+
+Phase10B_Output_v2/

@@ -1,0 +1,70 @@
+{
+  "created_utc": "2026-11-07T11:20:41.833106+00:00",
+  "audit_type": "isolated Phase 7 primary statistical reproduction",
+  "upstream_scripts_copied": 11,
+  "scientific_results_match": true,
+  "scientific_comparison_tolerance": {
+    "rtol": 1e-09,
+    "atol": 1e-12
+  },
+  "original_phase7_script_sha256": "3ba93e15eb51b6a6a5d9ea83ba1612a60aa001abbc9301b292d21fdca4ccb1bd",
+  "recovered_phase7_script_sha256": "3ba93e15eb51b6a6a5d9ea83ba1612a60aa001abbc9301b292d21fdca4ccb1bd",
+  "phase7_metadata_differences": [
+    {
+      "file": "P7_01_factorial_parent_assignment_VALIDATED.csv",
+      "summary": {
+        "status": "REVIEW_DIFFERENCES",
+        "original_rows": 2017,
+        "reproduced_rows": 2017,
+        "different_cells": 2017,
+        "max_absolute_numeric_difference": 0.0
+      },
+      "column_differences": [
+        {
+          "column": "assignment_source",
+          "count": 2017,
+          "first_csv_row": 2,
+          "original_example": "DIRECT:P3_05_factorial_cell_manifest.csv:factorial_cell | MERGED:P3_05_factorial_cell_manifest.csv:chemical_state+P3_05_factorial_cell_manifest.csv:biological_state | MERGED:P4_11_chemical_support_train_only_recheck.csv:calc_state+P3_05_factorial_cell_manifest.csv:biological_state | MERGED:P4_11_chemical_support_train_only_recheck.csv:chemical_state+P3_05_factorial_cell_manifest.csv:biological_sta",
+          "reproduced_example": "DIRECT:P3_05_factorial_cell_manifest.csv:factorial_cell | MERGED:P3_03_chemical_support_by_parent.csv:chemical_state+P3_04_biological_support_by_parent.csv:biological_state | MERGED:P3_03_chemical_support_by_parent.csv:chemical_state+P3_05_factorial_cell_manifest.csv:biological_state | MERGED:P3_05_factorial_cell_manifest.csv:chemical_state+P3_04_biological_support_by_parent.csv:biological_state |"
+        }
+      ]
+    },
+    {
+      "file": "P7_11_integrity_tests.csv",
+      "summary": {
+        "status": "REVIEW_DIFFERENCES",
+        "original_rows": 14,
+        "reproduced_rows": 14,
+        "different_cells": 4,
+        "max_absolute_numeric_difference": 0.0
+      },
+      "column_differences": [
+        {
+          "column": "description",
+          "count": 4,
+          "first_csv_row": 7,
+          "original_example": "All 160 P4_10 endpoint\u00d7fold factorial support rows reproduce exactly",
+          "reproduced_example": "All 160 P4_10 endpoint\u00c3\u2014fold factorial support rows reproduce exactly"
+        }
+      ]
+    }
+  ],
+  "reference_files": {
+    "P7_02_locked_OOF_with_factorial_cells.csv": "ec3e1ba92a0f3f15e764d63ae92f987bf85c79650d242da855e76b1c5364e632",
+    "P7_03_learned_factorial_cell_metrics.csv": "a7fa2b41d349c0d023a1513bc25659997e08068ac6ee65ccbaab34238dbd496f",
+    "P7_04_control_factorial_cell_metrics.csv": "50872e9feb9fb7ab093f4c18c20f1785296caf5f895aa5b63fbd00d768721d1f",
+    "P7_05_confirmatory_factorial_contrasts.csv": "b0f72e09bb1ae66f3cea2516d32ac05fd2dd22dd6c8c7054f4a535d859c02aa6",
+    "P7_06_fusion_robustness.csv": "b56c31017cec2c1c64ff026bf1ecab546d7197e67ba984b0869e8dfd8f704f31",
+    "P7_07_optimism_contrasts.csv": "447a4a33374068dd3e642a50209c885b29d0bd6cfe0c3062d5d8f5f2dcbf0bb7",
+    "P7_08_reliability_contrasts.csv": "b564123f7c154878c7e0465bcb0f5e2f8e626de3040b103fabda1fcce1b7a472",
+    "P7_09_random_effects_endpoint_synthesis.csv": "245ddb89cd5532d518ec70e772f697df33e13a8cdc8afcfc6f2d8cc6645bf08c",
+    "P7_10_factorial_assignment_reconstruction_check.csv": "223ef2db5cbc5e15af91e6fbf9008b96ffdb6fc12d7c3f9342e2656d1c9cc3e1",
+    "P7_13_primary_endpoint_pooled_factorial_support.csv": "e4f5c4a6bdf8592aaffaec2c1b3e870a38bcae337d082f0ad9d697b9fae94ee3",
+    "P7_01_factorial_parent_assignment_VALIDATED.csv": "4cac4bb1604bac6159fd348b4e697cadbc5b37e45ed6e8a3eb1dffbfe5e95002",
+    "P7_11_integrity_tests.csv": "fc56bc47b152bd52176f20e5f72126476cc0740d746debf420bb1a5340b0ad24"
+  },
+  "frozen_input_files": {
+    "Phase6_Output\\P6_03_locked_parent_OOF_predictions.csv": "45d1c87930de43b9a02a75eddf00b696fd2f2351dbc2955841e34bde42a2c965",
+    "Phase6_Output\\P6_INDEPENDENT_VALIDATION_SUMMARY.json": "4854eb7e66b308db55a4e5dd94af46d7cbd139abd2deb258d5639dd63109ccba"
+  }
+}

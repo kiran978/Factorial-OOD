@@ -1,0 +1,11 @@
+{
+  "phase": "9A",
+  "status": "PASS",
+  "phase9_lock_sha256": "55f769210fa70d1be54904e1e59c7a639175811018a8373264fe3f3226027a01",
+  "bootstrap_resamples": 2000,
+  "definition_combinations": 25,
+  "performance_source": "immutable Phase7 OOF predictions",
+  "models_retrained": false,
+  "integrity_pass_n": 19,
+  "integrity_total_n": 19
+}

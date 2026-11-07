@@ -1,0 +1,10 @@
+{
+  "phase": 6,
+  "validation": "INDEPENDENT_POSTHOC",
+  "tests_total": 62,
+  "tests_passed": 62,
+  "tests_failed": 0,
+  "zip_sha256": "46dcf2bde991c3bd1d2ac4f58d58dd03fc9b6a138d72af247fb76d8504f6d0fa",
+  "registry_sha256": "10005b76d389dcc73466ef377cf4f5d2ee0787ff71b95523d08ab2b988276b57",
+  "decision": "PASS"
+}
